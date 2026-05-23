@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as MembersRouteImport } from './routes/members'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
+import { Route as MeetingNewRouteImport } from './routes/meeting.new'
+import { Route as MeetingSessionIdRouteImport } from './routes/meeting.$sessionId'
+import { Route as ChamasChamaIdRouteImport } from './routes/chamas.$chamaId'
 
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembersRoute = MembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChamasIndexRoute = ChamasIndexRouteImport.update({
+  id: '/chamas/',
+  path: '/chamas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingNewRoute = MeetingNewRouteImport.update({
+  id: '/meeting/new',
+  path: '/meeting/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingSessionIdRoute = MeetingSessionIdRouteImport.update({
+  id: '/meeting/$sessionId',
+  path: '/meeting/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChamasChamaIdRoute = ChamasChamaIdRouteImport.update({
+  id: '/chamas/$chamaId',
+  path: '/chamas/$chamaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/members': typeof MembersRoute
+  '/reports': typeof ReportsRoute
+  '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
+  '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/members': typeof MembersRoute
+  '/reports': typeof ReportsRoute
+  '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
+  '/chamas': typeof ChamasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/members': typeof MembersRoute
+  '/reports': typeof ReportsRoute
+  '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
+  '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/members'
+    | '/reports'
+    | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
+    | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/members'
+    | '/reports'
+    | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
+    | '/chamas'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/members'
+    | '/reports'
+    | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
+    | '/chamas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
+  MembersRoute: typeof MembersRoute
+  ReportsRoute: typeof ReportsRoute
+  ChamasChamaIdRoute: typeof ChamasChamaIdRoute
+  MeetingSessionIdRoute: typeof MeetingSessionIdRoute
+  MeetingNewRoute: typeof MeetingNewRoute
+  ChamasIndexRoute: typeof ChamasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/members': {
+      id: '/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof MembersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +184,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chamas/': {
+      id: '/chamas/'
+      path: '/chamas'
+      fullPath: '/chamas/'
+      preLoaderRoute: typeof ChamasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meeting/new': {
+      id: '/meeting/new'
+      path: '/meeting/new'
+      fullPath: '/meeting/new'
+      preLoaderRoute: typeof MeetingNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meeting/$sessionId': {
+      id: '/meeting/$sessionId'
+      path: '/meeting/$sessionId'
+      fullPath: '/meeting/$sessionId'
+      preLoaderRoute: typeof MeetingSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chamas/$chamaId': {
+      id: '/chamas/$chamaId'
+      path: '/chamas/$chamaId'
+      fullPath: '/chamas/$chamaId'
+      preLoaderRoute: typeof ChamasChamaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
+  MembersRoute: MembersRoute,
+  ReportsRoute: ReportsRoute,
+  ChamasChamaIdRoute: ChamasChamaIdRoute,
+  MeetingSessionIdRoute: MeetingSessionIdRoute,
+  MeetingNewRoute: MeetingNewRoute,
+  ChamasIndexRoute: ChamasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
