@@ -15,6 +15,8 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
+import { Route as MeetingNewRouteImport } from './routes/meeting.new'
+import { Route as MeetingSessionIdRouteImport } from './routes/meeting.$sessionId'
 import { Route as ChamasChamaIdRouteImport } from './routes/chamas.$chamaId'
 
 const ReportsRoute = ReportsRouteImport.update({
@@ -47,6 +49,16 @@ const ChamasIndexRoute = ChamasIndexRouteImport.update({
   path: '/chamas/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MeetingNewRoute = MeetingNewRouteImport.update({
+  id: '/meeting/new',
+  path: '/meeting/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingSessionIdRoute = MeetingSessionIdRouteImport.update({
+  id: '/meeting/$sessionId',
+  path: '/meeting/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ChamasChamaIdRoute = ChamasChamaIdRouteImport.update({
   id: '/chamas/$chamaId',
   path: '/chamas/$chamaId',
@@ -60,6 +72,8 @@ export interface FileRoutesByFullPath {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +83,8 @@ export interface FileRoutesByTo {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
   '/chamas': typeof ChamasIndexRoute
 }
 export interface FileRoutesById {
@@ -79,6 +95,8 @@ export interface FileRoutesById {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/meeting/$sessionId': typeof MeetingSessionIdRoute
+  '/meeting/new': typeof MeetingNewRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +108,8 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
     | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +119,8 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
     | '/chamas'
   id:
     | '__root__'
@@ -108,6 +130,8 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/meeting/$sessionId'
+    | '/meeting/new'
     | '/chamas/'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +142,8 @@ export interface RootRouteChildren {
   MembersRoute: typeof MembersRoute
   ReportsRoute: typeof ReportsRoute
   ChamasChamaIdRoute: typeof ChamasChamaIdRoute
+  MeetingSessionIdRoute: typeof MeetingSessionIdRoute
+  MeetingNewRoute: typeof MeetingNewRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
 }
 
@@ -165,6 +191,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChamasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/meeting/new': {
+      id: '/meeting/new'
+      path: '/meeting/new'
+      fullPath: '/meeting/new'
+      preLoaderRoute: typeof MeetingNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meeting/$sessionId': {
+      id: '/meeting/$sessionId'
+      path: '/meeting/$sessionId'
+      fullPath: '/meeting/$sessionId'
+      preLoaderRoute: typeof MeetingSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chamas/$chamaId': {
       id: '/chamas/$chamaId'
       path: '/chamas/$chamaId'
@@ -182,6 +222,8 @@ const rootRouteChildren: RootRouteChildren = {
   MembersRoute: MembersRoute,
   ReportsRoute: ReportsRoute,
   ChamasChamaIdRoute: ChamasChamaIdRoute,
+  MeetingSessionIdRoute: MeetingSessionIdRoute,
+  MeetingNewRoute: MeetingNewRoute,
   ChamasIndexRoute: ChamasIndexRoute,
 }
 export const routeTree = rootRouteImport
