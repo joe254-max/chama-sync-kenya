@@ -461,7 +461,7 @@ function MeetingEditor() {
             grandC={grandC}
             grandD={grandD}
             surplus={surplus}
-            onSubmit={(comment) => submit.mutate(comment)}
+            onSubmit={(comment: string) => submit.mutate(comment)}
             isPending={submit.isPending}
           />
         </TabsContent>
