@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
@@ -55,8 +56,8 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold">CS</div>
-          <CardTitle>ChamaSync</CardTitle>
+          <img src={logo} alt="M-Chama" className="mx-auto mb-2 h-16 w-16 object-contain" />
+          <CardTitle>M-Chama</CardTitle>
           <CardDescription>Sign in or create your account</CardDescription>
         </CardHeader>
         <CardContent>

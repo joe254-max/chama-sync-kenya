@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LayoutDashboard, Users, Wallet, FileText, LogOut, Menu, X } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+import logo from "@/assets/logo.png";
 
 const nav = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -35,8 +36,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Mobile top bar */}
       <header className="flex items-center justify-between border-b bg-sidebar px-4 py-3 md:hidden">
         <Link to="/dashboard" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">CS</div>
-          <span className="font-semibold">ChamaSync</span>
+          <img src={logo} alt="M-Chama" className="h-8 w-8 object-contain" />
+          <span className="font-semibold">M-Chama</span>
         </Link>
         <Button variant="ghost" size="icon" onClick={() => setOpen(!open)}>
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -46,9 +47,9 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className={`${open ? "block" : "hidden"} border-b bg-sidebar md:block md:w-64 md:border-b-0 md:border-r`}>
         <div className="hidden items-center gap-2 border-b px-6 py-5 md:flex">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold">CS</div>
+          <img src={logo} alt="M-Chama" className="h-10 w-10 object-contain" />
           <div>
-            <div className="font-semibold">ChamaSync</div>
+            <div className="font-semibold">M-Chama</div>
             <Badge variant="secondary" className="text-xs">{roleLabel}</Badge>
           </div>
         </div>
