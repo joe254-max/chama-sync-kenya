@@ -15,8 +15,11 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
+import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MeetingNewRouteImport } from './routes/meeting.new'
 import { Route as MeetingSessionIdRouteImport } from './routes/meeting.$sessionId'
+import { Route as LoginOfficerRouteImport } from './routes/login.officer'
+import { Route as LoginMemberRouteImport } from './routes/login.member'
 import { Route as ChamasChamaIdRouteImport } from './routes/chamas.$chamaId'
 
 const ReportsRoute = ReportsRouteImport.update({
@@ -49,6 +52,11 @@ const ChamasIndexRoute = ChamasIndexRouteImport.update({
   path: '/chamas/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemberHomeRoute = MemberHomeRouteImport.update({
+  id: '/member/home',
+  path: '/member/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MeetingNewRoute = MeetingNewRouteImport.update({
   id: '/meeting/new',
   path: '/meeting/new',
@@ -57,6 +65,16 @@ const MeetingNewRoute = MeetingNewRouteImport.update({
 const MeetingSessionIdRoute = MeetingSessionIdRouteImport.update({
   id: '/meeting/$sessionId',
   path: '/meeting/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginOfficerRoute = LoginOfficerRouteImport.update({
+  id: '/login/officer',
+  path: '/login/officer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginMemberRoute = LoginMemberRouteImport.update({
+  id: '/login/member',
+  path: '/login/member',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChamasChamaIdRoute = ChamasChamaIdRouteImport.update({
@@ -72,8 +90,11 @@ export interface FileRoutesByFullPath {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/login/member': typeof LoginMemberRoute
+  '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
+  '/member/home': typeof MemberHomeRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -83,8 +104,11 @@ export interface FileRoutesByTo {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/login/member': typeof LoginMemberRoute
+  '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
+  '/member/home': typeof MemberHomeRoute
   '/chamas': typeof ChamasIndexRoute
 }
 export interface FileRoutesById {
@@ -95,8 +119,11 @@ export interface FileRoutesById {
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
+  '/login/member': typeof LoginMemberRoute
+  '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
+  '/member/home': typeof MemberHomeRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,8 +135,11 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/login/member'
+    | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
+    | '/member/home'
     | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,8 +149,11 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/login/member'
+    | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
+    | '/member/home'
     | '/chamas'
   id:
     | '__root__'
@@ -130,8 +163,11 @@ export interface FileRouteTypes {
     | '/members'
     | '/reports'
     | '/chamas/$chamaId'
+    | '/login/member'
+    | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
+    | '/member/home'
     | '/chamas/'
   fileRoutesById: FileRoutesById
 }
@@ -142,8 +178,11 @@ export interface RootRouteChildren {
   MembersRoute: typeof MembersRoute
   ReportsRoute: typeof ReportsRoute
   ChamasChamaIdRoute: typeof ChamasChamaIdRoute
+  LoginMemberRoute: typeof LoginMemberRoute
+  LoginOfficerRoute: typeof LoginOfficerRoute
   MeetingSessionIdRoute: typeof MeetingSessionIdRoute
   MeetingNewRoute: typeof MeetingNewRoute
+  MemberHomeRoute: typeof MemberHomeRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
 }
 
@@ -191,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChamasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/member/home': {
+      id: '/member/home'
+      path: '/member/home'
+      fullPath: '/member/home'
+      preLoaderRoute: typeof MemberHomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/meeting/new': {
       id: '/meeting/new'
       path: '/meeting/new'
@@ -203,6 +249,20 @@ declare module '@tanstack/react-router' {
       path: '/meeting/$sessionId'
       fullPath: '/meeting/$sessionId'
       preLoaderRoute: typeof MeetingSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/officer': {
+      id: '/login/officer'
+      path: '/login/officer'
+      fullPath: '/login/officer'
+      preLoaderRoute: typeof LoginOfficerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/member': {
+      id: '/login/member'
+      path: '/login/member'
+      fullPath: '/login/member'
+      preLoaderRoute: typeof LoginMemberRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chamas/$chamaId': {
@@ -222,20 +282,13 @@ const rootRouteChildren: RootRouteChildren = {
   MembersRoute: MembersRoute,
   ReportsRoute: ReportsRoute,
   ChamasChamaIdRoute: ChamasChamaIdRoute,
+  LoginMemberRoute: LoginMemberRoute,
+  LoginOfficerRoute: LoginOfficerRoute,
   MeetingSessionIdRoute: MeetingSessionIdRoute,
   MeetingNewRoute: MeetingNewRoute,
+  MemberHomeRoute: MemberHomeRoute,
   ChamasIndexRoute: ChamasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
