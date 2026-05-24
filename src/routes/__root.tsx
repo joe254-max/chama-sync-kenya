@@ -45,8 +45,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ChamaSync — Manage your Chama with confidence" },
-      { name: "description", content: "ChamaSync helps Kenyan savings groups (chamas) track members, savings, loans, and meetings." },
+      { title: "M-Chama — Together We Grow" },
+      { name: "description", content: "M-Chama helps Kenyan savings groups (chamas) track members, savings, loans, and meetings." },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),

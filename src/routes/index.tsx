@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { ClipboardList, Wallet, ArrowRight } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -22,11 +23,8 @@ function Landing() {
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col">
         {/* Logo */}
         <div className="flex flex-col items-center text-center">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-xl font-bold shadow-lg">
-            CS
-          </div>
-          <h1 className="mt-4 text-2xl font-bold text-foreground">ChamaSync</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Built for Kenyan Chamas</p>
+          <img src={logo} alt="M-Chama logo" className="h-24 w-24 object-contain" />
+          <p className="mt-1 text-sm text-muted-foreground">Together We Grow</p>
         </div>
 
         {/* Heading */}
