@@ -1,66 +1,86 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@/components/ui/button";
-import { Users, Wallet, BarChart3, ShieldCheck } from "lucide-react";
+import { ClipboardList, Wallet, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Landing,
 });
 
 function Landing() {
-  const { user, loading } = useAuth();
+  const { user, loading, isOfficer, roles } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && user) navigate({ to: "/dashboard" });
-  }, [user, loading, navigate]);
+    if (loading || !user) return;
+    if (isOfficer) navigate({ to: "/dashboard" });
+    else if (roles.includes("member")) navigate({ to: "/member/home" });
+  }, [user, loading, isOfficer, roles, navigate]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold">CS</div>
-            <span className="text-lg font-semibold">ChamaSync</span>
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 px-4 py-8">
+      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col">
+        {/* Logo */}
+        <div className="flex flex-col items-center text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-xl font-bold shadow-lg">
+            CS
           </div>
-          <Link to="/auth"><Button>Sign in</Button></Link>
+          <h1 className="mt-4 text-2xl font-bold text-foreground">ChamaSync</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Built for Kenyan Chamas</p>
         </div>
-      </header>
 
-      <main>
-        <section className="container mx-auto px-4 py-20 text-center">
-          <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Manage your <span className="text-primary">Chama</span> with confidence
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            ChamaSync brings your Kenyan savings group into one clean, mobile-friendly app —
-            members, savings, loans, and meeting records, all in one place.
-          </p>
-          <div className="mt-8 flex justify-center gap-3">
-            <Link to="/auth"><Button size="lg">Get started</Button></Link>
-          </div>
-        </section>
+        {/* Heading */}
+        <div className="mt-10 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">
+            Welcome back.
+          </h2>
+          <p className="mt-2 text-lg text-muted-foreground">Who are you?</p>
+        </div>
 
-        <section className="container mx-auto grid gap-6 px-4 pb-20 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Users, title: "Member management", body: "Track every member, their savings, shares and loans." },
-            { icon: Wallet, title: "Meeting Mode", body: "Streamlined data entry built for live chama meetings." },
-            { icon: BarChart3, title: "Reports & analytics", body: "Performance reports and growth charts that match your paper forms." },
-            { icon: ShieldCheck, title: "Secure by design", body: "Role-based access — admins, officers and members each see what they should." },
-          ].map((f) => (
-            <div key={f.title} className="rounded-xl border bg-card p-6">
-              <f.icon className="h-6 w-6 text-primary" />
-              <h3 className="mt-3 font-semibold">{f.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{f.body}</p>
+        {/* Role cards */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <Link
+            to="/login/officer"
+            className="group flex min-h-[180px] flex-col justify-between rounded-2xl border-2 border-primary/20 bg-card p-5 shadow-sm transition hover:border-primary hover:shadow-md active:scale-[0.98]"
+          >
+            <div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <ClipboardList className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-foreground">I am an Officer</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Manage chamas, meetings and member records
+              </p>
             </div>
-          ))}
-        </section>
-      </main>
+            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-primary">
+              Continue <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </div>
+          </Link>
 
-      <footer className="border-t py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} ChamaSync
-      </footer>
+          <Link
+            to="/login/member"
+            className="group flex min-h-[180px] flex-col justify-between rounded-2xl border-2 border-[oklch(0.65_0.18_300)]/20 bg-card p-5 shadow-sm transition hover:border-[oklch(0.65_0.18_300)] hover:shadow-md active:scale-[0.98]"
+          >
+            <div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[oklch(0.65_0.18_300)]/10 text-[oklch(0.55_0.2_300)]">
+                <Wallet className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-lg font-semibold text-foreground">I am a Member</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                View my savings, loans and transactions
+              </p>
+            </div>
+            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-[oklch(0.55_0.2_300)]">
+              Continue <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </div>
+          </Link>
+        </div>
+
+        {/* Footer hint */}
+        <p className="mt-auto pt-10 text-center text-sm text-muted-foreground">
+          First time here? Contact your chama officer to get registered.
+        </p>
+      </div>
     </div>
   );
 }
