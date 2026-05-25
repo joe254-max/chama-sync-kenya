@@ -88,7 +88,7 @@ function MemberLogin() {
   const signUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -96,9 +96,14 @@ function MemberLogin() {
         data: { full_name: fullName },
       },
     });
+    if (error) { setBusy(false); return toast.error(error.message); }
+    if (data.session && data.user) {
+      toast.success("Account created! Welcome.");
+      await finishMemberLogin(data.user.id, data.user.email ?? email);
+    } else {
+      toast.success("Account created. Check your email to confirm, then sign in.");
+    }
     setBusy(false);
-    if (error) return toast.error(error.message);
-    toast.success("Account created. Check your email to confirm, then sign in.");
   };
 
   const forgotPassword = async () => {
