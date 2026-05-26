@@ -141,5 +141,3 @@ function Snap({ val, label, color }: { val: string; label: string; color?: strin
     </div>
   );
 }
-// Suppress unused import warning
-void Banknote;
