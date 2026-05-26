@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MemberShell } from "@/components/MemberShell";
-import {
-  TrendingUp, Check, Banknote, Gift, Info,
-} from "lucide-react";
+import { TrendingUp, Check, Gift, Info } from "lucide-react";
 
 export const Route = createFileRoute("/member/home")({ component: MemberHome });
 
