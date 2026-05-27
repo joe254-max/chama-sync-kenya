@@ -124,12 +124,17 @@ function OfficerLogin() {
           </CardContent>
         </Card>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-white/80">
           Not an officer?{" "}
           <Link to="/login/member" className="font-medium text-primary hover:underline">
             Member login
           </Link>
         </p>
+        </div>
+
+        <div className="hidden lg:flex justify-center">
+          <LoginTagline />
+        </div>
       </div>
     </div>
   );
