@@ -66,18 +66,6 @@ export function LoginBackdrop() {
       ))}
       {/* subtle wash for readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/40" />
-            backgroundImage: `url(${src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: i === idx ? 0.28 : 0,
-            transform: i === idx ? "scale(1.05)" : "scale(1)",
-            transition: "opacity 2000ms ease-in-out, transform 7000ms ease-out",
-          }}
-          aria-hidden
-        />
-      ))}
-      {/* gradient wash for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
 
       {/* Typing tagline */}
       <div className="absolute inset-x-0 bottom-6 flex justify-center px-4">
