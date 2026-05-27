@@ -28,24 +28,11 @@ const SLIDE_MS = 6500;
 
 export function LoginBackdrop() {
   const [idx, setIdx] = useState(0);
-  const [typed, setTyped] = useState("");
 
   useEffect(() => {
     const t = setInterval(() => setIdx((i) => (i + 1) % SLIDES.length), SLIDE_MS);
     return () => clearInterval(t);
   }, []);
-
-  useEffect(() => {
-    setTyped("");
-    const full = TAGLINES[idx];
-    let i = 0;
-    const t = setInterval(() => {
-      i++;
-      setTyped(full.slice(0, i));
-      if (i >= full.length) clearInterval(t);
-    }, 55);
-    return () => clearInterval(t);
-  }, [idx]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
@@ -64,18 +51,41 @@ export function LoginBackdrop() {
           aria-hidden
         />
       ))}
-      {/* subtle wash for readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/40" />
+    </div>
+  );
+}
 
-      {/* Typing tagline */}
-      <div className="absolute inset-x-0 bottom-6 flex justify-center px-4">
-        <p className="max-w-2xl text-center text-base md:text-xl font-medium tracking-tight text-foreground/90 drop-shadow">
-          <span className="bg-gradient-to-r from-primary to-[oklch(0.65_0.18_300)] bg-clip-text text-transparent">
-            {typed}
-          </span>
-          <span className="ml-0.5 inline-block h-5 w-[2px] translate-y-1 animate-pulse bg-primary" />
-        </p>
-      </div>
+export function LoginTagline() {
+  const [idx, setIdx] = useState(0);
+  const [typed, setTyped] = useState("");
+
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % TAGLINES.length), SLIDE_MS);
+    return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    setTyped("");
+    const full = TAGLINES[idx];
+    let i = 0;
+    const t = setInterval(() => {
+      i++;
+      setTyped(full.slice(0, i));
+      if (i >= full.length) clearInterval(t);
+    }, 55);
+    return () => clearInterval(t);
+  }, [idx]);
+
+  return (
+    <div className="w-full max-w-xl rounded-3xl border border-white/20 bg-white/10 p-8 md:p-12 shadow-2xl backdrop-blur-xl">
+      <p className="text-xs uppercase tracking-[0.3em] text-white/70 mb-4">Chama Wisdom</p>
+      <p className="min-h-[8rem] md:min-h-[10rem] text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+        <span className="bg-gradient-to-r from-white via-primary-foreground to-[oklch(0.85_0.15_300)] bg-clip-text text-transparent drop-shadow">
+          {typed}
+        </span>
+        <span className="ml-1 inline-block h-10 md:h-14 w-[3px] translate-y-2 animate-pulse bg-primary" />
+      </p>
     </div>
   );
 }
