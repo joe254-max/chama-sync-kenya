@@ -259,10 +259,15 @@ function MemberLogin() {
           </CardContent>
         </Card>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-white/80">
           Are you an officer?{" "}
           <Link to="/login/officer" className="font-medium text-primary hover:underline">Officer login</Link>
         </p>
+        </div>
+
+        <div className="hidden lg:flex justify-center">
+          <LoginTagline />
+        </div>
       </div>
     </div>
   );
