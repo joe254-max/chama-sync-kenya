@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "sonner";
 import { ArrowLeft, ClipboardList, Loader2 } from "lucide-react";
-import { LoginBackdrop } from "@/components/LoginBackdrop";
+import { LoginBackdrop, LoginTagline } from "@/components/LoginBackdrop";
 
 export const Route = createFileRoute("/login/officer")({
   component: OfficerLogin,
@@ -67,10 +67,11 @@ function OfficerLogin() {
   return (
     <div className="relative min-h-screen px-4 py-6">
       <LoginBackdrop />
-      <div className="mx-auto max-w-md">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 lg:grid-cols-2">
+        <div className="w-full max-w-md mx-auto lg:mx-0">
         <Link
           to="/"
-          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+          className="inline-flex items-center gap-1 text-sm text-white/80 hover:text-white"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
@@ -123,12 +124,17 @@ function OfficerLogin() {
           </CardContent>
         </Card>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-white/80">
           Not an officer?{" "}
           <Link to="/login/member" className="font-medium text-primary hover:underline">
             Member login
           </Link>
         </p>
+        </div>
+
+        <div className="hidden lg:flex justify-center">
+          <LoginTagline />
+        </div>
       </div>
     </div>
   );
