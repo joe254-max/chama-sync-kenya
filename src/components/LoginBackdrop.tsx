@@ -52,20 +52,20 @@ export function LoginBackdrop() {
       {SLIDES.map((src, i) => (
         <div
           key={i}
-          className="absolute inset-0 transition-opacity duration-[2000ms] ease-in-out"
+          className="absolute inset-0"
           style={{
             backgroundImage: `url(${src})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: i === idx ? 0.28 : 0,
-            transform: i === idx ? "scale(1.05)" : "scale(1)",
+            opacity: i === idx ? 0.65 : 0,
+            transform: i === idx ? "scale(1.08)" : "scale(1)",
             transition: "opacity 2000ms ease-in-out, transform 7000ms ease-out",
           }}
           aria-hidden
         />
       ))}
-      {/* gradient wash for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
+      {/* subtle wash for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/10 to-background/40" />
 
       {/* Typing tagline */}
       <div className="absolute inset-x-0 bottom-6 flex justify-center px-4">
