@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "sonner";
 import { ArrowLeft, ClipboardList, Loader2 } from "lucide-react";
+import { LoginBackdrop } from "@/components/LoginBackdrop";
 
 export const Route = createFileRoute("/login/officer")({
   component: OfficerLogin,
@@ -64,7 +65,8 @@ function OfficerLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 px-4 py-6">
+    <div className="relative min-h-screen px-4 py-6">
+      <LoginBackdrop />
       <div className="mx-auto max-w-md">
         <Link
           to="/"
@@ -73,7 +75,7 @@ function OfficerLogin() {
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
 
-        <Card className="mt-6">
+        <Card className="mt-6 border-white/20 bg-card/40 shadow-2xl backdrop-blur-xl">
           <CardHeader className="text-center">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <ClipboardList className="h-6 w-6" />
