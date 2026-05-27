@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { ArrowLeft, Wallet, Loader2, Fingerprint } from "lucide-react";
+import { LoginBackdrop } from "@/components/LoginBackdrop";
 import {
   isBiometricAvailable,
   hasBiometricEnrolled,
@@ -155,7 +156,8 @@ function MemberLogin() {
   if (askEnroll) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
-        <Card className="w-full max-w-md">
+        <LoginBackdrop />
+        <Card className="w-full max-w-md border-white/20 bg-card/40 shadow-2xl backdrop-blur-xl">
           <CardHeader className="text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <Fingerprint className="h-7 w-7" />
@@ -177,13 +179,14 @@ function MemberLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-[oklch(0.65_0.18_300)]/5 px-4 py-6">
+    <div className="relative min-h-screen px-4 py-6">
+      <LoginBackdrop />
       <div className="mx-auto max-w-md">
         <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
 
-        <Card className="mt-6">
+        <Card className="mt-6 border-white/20 bg-card/40 shadow-2xl backdrop-blur-xl">
           <CardHeader className="text-center">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[oklch(0.65_0.18_300)]/10 text-[oklch(0.55_0.2_300)]">
               <Wallet className="h-6 w-6" />
