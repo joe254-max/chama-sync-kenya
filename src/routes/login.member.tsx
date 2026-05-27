@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { ArrowLeft, Wallet, Loader2, Fingerprint } from "lucide-react";
-import { LoginBackdrop } from "@/components/LoginBackdrop";
+import { LoginBackdrop, LoginTagline } from "@/components/LoginBackdrop";
 import {
   isBiometricAvailable,
   hasBiometricEnrolled,
