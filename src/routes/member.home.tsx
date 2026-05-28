@@ -1,143 +1,61 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowDown, ArrowUp, CalendarDays, PiggyBank, Wallet, Users } from "lucide-react";
 import { MemberShell } from "@/components/MemberShell";
-import { TrendingUp, Check, Gift, Info } from "lucide-react";
+import { ActivityList, DoughnutCard, MemberCard, MemberPage, PromoCard, StatCard } from "@/components/member-ui";
 
 export const Route = createFileRoute("/member/home")({ component: MemberHome });
 
 function MemberHome() {
   return (
-    <MemberShell subtitle="meeting in 3 days">
-      <div className="grid items-start gap-5 lg:grid-cols-[1fr_300px]">
-        {/* Left */}
-        <div className="flex min-w-0 flex-col gap-4">
-          {/* Hero row */}
-          <div className="grid gap-3.5 sm:grid-cols-2">
-            <div className="rounded-xl border border-[#534AB7] bg-[#7F77DD] p-5">
-              <div className="text-xs text-[#AFA9EC]">Total savings balance</div>
-              <div className="text-[26px] font-medium tracking-tight text-[#EEEDFE]">KES 26,144</div>
-              <div className="mt-1.5 flex items-center gap-1 text-xs text-[#AFA9EC]">
-                <TrendingUp className="h-3.5 w-3.5" /> +KES 1,400 this month
-              </div>
-              <div className="mt-3">
-                <div className="mb-1 flex justify-between text-[11px] text-[#AFA9EC]"><span>Savings goal progress</span><span>63%</span></div>
-                <div className="h-[5px] overflow-hidden rounded bg-[#534AB7]"><div className="h-full rounded bg-[#EEEDFE]" style={{ width: "63%" }} /></div>
-                <div className="mt-1 flex justify-between text-[11px] text-[#AFA9EC]"><span>KES 0</span><span>Target: KES 41,500</span></div>
-              </div>
+    <MemberShell>
+      <MemberPage
+        title="Welcome back, John 👋"
+        subtitle="Here's what's happening with your finances today."
+        statCards={
+          <>
+            <StatCard icon={PiggyBank} iconWrap="bg-red-50" iconColor="text-red-500" label="Total Savings" value="KSh 128,450" meta="Across all chamas" />
+            <StatCard icon={Wallet} iconWrap="bg-emerald-50" iconColor="text-emerald-600" label="Total Contributions" value="KSh 96,500" meta="This year" trend={{ value: "+ 12.5%", tone: "positive" }} />
+            <StatCard icon={ArrowDown} iconWrap="bg-violet-50" iconColor="text-indigo-500" label="Total Withdrawals" value="KSh 27,000" meta="All time" />
+            <StatCard icon={Users} iconWrap="bg-amber-50" iconColor="text-amber-500" label="Active Chamas" value="3" meta="You are a member" />
+          </>
+        }
+      >
+        <div className="grid gap-5 xl:grid-cols-[1.05fr_1.1fr_.92fr]">
+          <MemberCard title="My Chamas" action={<button className="text-[15px] font-semibold text-red-600">View all</button>}>
+            <div className="space-y-4 px-6 py-5">
+              {[
+                ["Ufanisi Chama", "Next meeting: 24 May 2024", "Member", "KSh 45,000", "#c00"],
+                ["Pamoja Investment", "Next meeting: 30 May 2024", "Treasurer", "KSh 32,500", "#f59e0b"],
+                ["Tujijenge Chama", "Next meeting: 05 Jun 2024", "Member", "KSh 50,950", "#16a34a"],
+              ].map(([name, sub, role, value, color]) => (
+                <div key={name} className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4 last:border-b-0 last:pb-0">
+                  <div className="flex items-center gap-3"><div className="flex h-12 w-12 items-center justify-center rounded-full text-white" style={{ backgroundColor: String(color) }}>{String(name).charAt(0)}</div><div><div className="text-[15px] font-semibold">{name}</div><div className="text-[14px] text-slate-500">{sub}</div></div></div>
+                  <div className="text-right"><div className="text-[13px] text-slate-500">My Savings</div><div className="text-[17px] font-semibold text-emerald-600">{value}</div></div>
+                </div>
+              ))}
+              <button className="mt-2 h-12 w-full rounded-[14px] bg-red-700 text-[15px] font-semibold text-white">+ Join a New Chama</button>
             </div>
-            <div className="rounded-xl border bg-background p-5">
-              <div className="text-xs text-muted-foreground">Active loan balance</div>
-              <div className="text-[26px] font-medium tracking-tight text-[#A32D2D]">KES 25,800</div>
-              <div className="mt-1.5 flex items-center gap-1 text-xs text-[#1D9E75]"><Check className="h-3.5 w-3.5" /> KES 1,400 repaid last meeting</div>
-              <div className="mt-3">
-                <div className="mb-1 flex justify-between text-xs text-muted-foreground"><span>Repayment progress</span><span className="font-medium text-[#1D9E75]">45%</span></div>
-                <div className="h-2 overflow-hidden rounded border bg-muted/40"><div className="h-full rounded bg-[#1D9E75]" style={{ width: "45%" }} /></div>
-                <div className="mt-1.5 text-[11px] text-muted-foreground">Next payment: KES 1,400 due 16 May</div>
-              </div>
+          </MemberCard>
+          <DoughnutCard
+            title={<div className="flex items-center justify-between"><span>Savings Overview</span><button className="rounded-xl border border-slate-200 px-4 py-2 text-[14px] font-medium text-slate-700">This Year</button></div>}
+            total="KSh 128,450"
+            segments={[{ color: "#d10d0d", value: 35.1 }, { color: "#f59e0b", value: 25.3 }, { color: "#16a34a", value: 39.6 }]}
+            legend={[{ color: "#d10d0d", label: "Ufanisi Chama", value: "KSh 45,000", percent: "35.1%" }, { color: "#f59e0b", label: "Pamoja Investment", value: "KSh 32,500", percent: "25.3%" }, { color: "#16a34a", label: "Tujijenge Chama", value: "KSh 50,950", percent: "39.6%" }]}
+          />
+          <MemberCard title="Upcoming Meetings" action={<button className="text-[15px] font-semibold text-red-600">View all</button>}>
+            <div className="space-y-5 px-6 py-5">
+              {[["Ufanisi Chama", "24 May 2024 · 7:00 PM", "In 2 days", "bg-red-50 text-red-500"], ["Pamoja Investment", "30 May 2024 · 7:00 PM", "In 8 days", "bg-amber-50 text-amber-500"], ["Tujijenge Chama", "05 Jun 2024 · 7:00 PM", "In 14 days", "bg-emerald-50 text-emerald-600"]].map(([name, time, badge, cls]) => <div key={name} className="flex items-center justify-between gap-3"><div className="flex items-center gap-3"><div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-700 text-white"><CalendarDays className="h-5 w-5" /></div><div><div className="text-[15px] font-semibold">{name}</div><div className="text-[14px] text-slate-500">{time}</div></div></div><span className={`rounded-full px-3 py-1 text-[12px] font-medium ${cls}`}>{badge}</span></div>)}
             </div>
-          </div>
-
-          {/* Loan schedule */}
-          <Section title="Loan repayment schedule" link="Full schedule">
-            <div className="mb-1.5 flex justify-between text-xs text-muted-foreground"><span>Loan issued: KES 57,000 · Jan 2026</span><span className="font-medium text-[#1D9E75]">45% cleared</span></div>
-            <div className="h-2.5 overflow-hidden rounded border bg-muted/40"><div className="h-full rounded bg-[#1D9E75]" style={{ width: "45%" }} /></div>
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              <Stat val="KES 31,200" label="Repaid" color="#0F6E56" />
-              <Stat val="KES 25,800" label="Outstanding" color="#A32D2D" />
-              <Stat val="6 months" label="Remaining" />
-            </div>
-          </Section>
+          </MemberCard>
         </div>
 
-        {/* Right */}
-        <div className="flex min-w-0 flex-col gap-4">
-          {/* Financial health */}
-          <Section title="Financial health score" link="Improve ↗">
-            <div className="flex items-center gap-4 pb-3">
-              <svg width="70" height="70" viewBox="0 0 70 70">
-                <circle cx="35" cy="35" r="28" fill="none" stroke="#EEEDFE" strokeWidth="7" />
-                <circle cx="35" cy="35" r="28" fill="none" stroke="#7F77DD" strokeWidth="7" strokeDasharray="142 176" strokeDashoffset="35" strokeLinecap="round" />
-                <text x="35" y="40" textAnchor="middle" fontSize="16" fontWeight="500" fill="#7F77DD">81</text>
-              </svg>
-              <div className="flex-1">
-                <div className="text-[28px] font-medium leading-none text-[#7F77DD]">81<span className="text-sm text-muted-foreground">/100</span></div>
-                <div className="mb-2 text-xs text-muted-foreground">Good standing</div>
-                <Health label="Contributions" pct={92} />
-                <Health label="Loan repayment" pct={75} color="#1D9E75" />
-                <Health label="Attendance" pct={80} />
-              </div>
-            </div>
-            <div className="rounded-md bg-[#EEEDFE] px-3 py-2 text-xs text-[#3C3489] flex items-center gap-1.5"><Info className="h-3.5 w-3.5" />You qualify for loans up to <strong>KES 78,432</strong></div>
-          </Section>
-
-          {/* Savings goal */}
-          <div className="rounded-xl border bg-background p-5">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="text-sm font-medium">Savings goal</div>
-              <div className="cursor-pointer text-xs text-[#7F77DD]">Edit</div>
-            </div>
-            <div className="mb-2 flex items-baseline justify-between">
-              <div className="text-lg font-medium text-[#7F77DD]">KES 26,144</div>
-              <div className="text-xs text-muted-foreground">of KES 41,500 target</div>
-            </div>
-            <div className="h-2 overflow-hidden rounded border bg-muted/40"><div className="h-full rounded bg-[#1D9E75]" style={{ width: "63%" }} /></div>
-            <div className="mt-1.5 flex justify-between text-[11px] text-muted-foreground"><span>63% reached</span><span>By December 2026</span></div>
-          </div>
-
-          {/* Share-out */}
-          <div className="rounded-xl border border-[#9FE1CB] bg-[#E1F5EE] px-5 py-4">
-            <div className="mb-1 flex items-center gap-1 text-xs font-medium text-[#085041]"><Gift className="h-3.5 w-3.5" />Year-end share-out estimate</div>
-            <div className="text-[22px] font-medium text-[#0F6E56]">KES 12,400</div>
-            <div className="mt-1 text-[11px] leading-snug text-[#085041]/75">Based on current trajectory. Confirmed at December AGM.</div>
-          </div>
-
-          {/* Group snapshot */}
-          <Section title="Group snapshot">
-            <div className="grid grid-cols-2 gap-2">
-              <Snap val="KES 122,617" label="Group savings" color="#0F6E56" />
-              <Snap val="KES 185,900" label="Loans outstanding" color="#A32D2D" />
-              <Snap val="9/10" label="Paid this month" />
-              <Snap val="KES 2,471" label="Interest earned" color="#7F77DD" />
-            </div>
-          </Section>
+        <div className="mt-5 grid gap-5 xl:grid-cols-[1.35fr_1fr]">
+          <MemberCard title="Recent Transactions" action={<button className="text-[15px] font-semibold text-red-600">View all</button>}>
+            <ActivityList items={[{ icon: ArrowUp, iconWrap: "bg-emerald-50", iconColor: "text-emerald-600", title: "Contribution to Ufanisi Chama", subtitle: "May 20, 2024 · 10:30 AM", meta: "Contribution", value: "+ KSh 2,500", valueTone: "positive" }, { icon: ArrowDown, iconWrap: "bg-red-50", iconColor: "text-red-500", title: "Withdrawal from Pamoja Investment", subtitle: "May 15, 2024 · 03:45 PM", meta: "Withdrawal", value: "- KSh 5,000", valueTone: "negative" }, { icon: ArrowUp, iconWrap: "bg-emerald-50", iconColor: "text-emerald-600", title: "Contribution to Tujijenge Chama", subtitle: "May 10, 2024 · 09:15 AM", meta: "Contribution", value: "+ KSh 3,000", valueTone: "positive" }]} />
+          </MemberCard>
+          <PromoCard title="Grow Together, Thrive Together" description="Stay consistent with your contributions and watch your chama grow." buttonLabel="Make a Contribution" tone="red" artwork={<div className="relative h-[190px] w-[220px]"><div className="absolute bottom-0 right-1 h-28 w-20 rounded-[24px] border-4 border-white/20 bg-black/20" /><div className="absolute bottom-0 left-2 flex gap-2">{[32,44,56].map((h) => <span key={h} className="w-6 rounded-t-full bg-amber-400/80" style={{ height: h }} />)}</div></div>} />
         </div>
-      </div>
+      </MemberPage>
     </MemberShell>
-  );
-}
-
-function Section({ title, link, children }: { title: string; link?: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-xl border bg-background p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="text-sm font-medium">{title}</div>
-        {link && <div className="cursor-pointer text-xs text-[#7F77DD] hover:text-[#534AB7]">{link}</div>}
-      </div>
-      {children}
-    </div>
-  );
-}
-function Stat({ val, label, color }: { val: string; label: string; color?: string }) {
-  return (
-    <div className="rounded-md bg-muted/40 px-2.5 py-2">
-      <div className="text-sm font-medium" style={color ? { color } : undefined}>{val}</div>
-      <div className="mt-0.5 text-[11px] text-muted-foreground">{label}</div>
-    </div>
-  );
-}
-function Health({ label, pct, color = "#7F77DD" }: { label: string; pct: number; color?: string }) {
-  return (
-    <div className="mb-1 flex items-center justify-between gap-2 text-xs text-muted-foreground">
-      <span>{label}</span>
-      <div className="h-1 w-20 overflow-hidden rounded bg-muted/60"><div className="h-full rounded" style={{ width: `${pct}%`, background: color }} /></div>
-      <span>{pct}%</span>
-    </div>
-  );
-}
-function Snap({ val, label, color }: { val: string; label: string; color?: string }) {
-  return (
-    <div className="rounded-md bg-muted/40 px-3 py-2.5">
-      <div className="text-base font-medium" style={color ? { color } : undefined}>{val}</div>
-      <div className="mt-0.5 text-[11px] text-muted-foreground">{label}</div>
-    </div>
   );
 }
