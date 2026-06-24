@@ -20,7 +20,8 @@ const week = [
   { icon: FileText, color: "bg-violet-50 text-indigo-600", title: "Profile updated", sub: "Your profile information was updated successfully", time: "21 May 2024, 3:15 PM" },
 ];
 
-function NotifGroup({ title, items }: { title: string; items: typeof today }) {
+type NotifItem = { icon: typeof CalendarDays; color: string; title: string; sub: string; time: string; unread?: boolean };
+function NotifGroup({ title, items }: { title: string; items: NotifItem[] }) {
   return (
     <div className="space-y-3">
       <div className="text-sm font-semibold text-slate-500">{title}</div>

@@ -19,6 +19,7 @@ import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawa
 import { Route as MemberTransactionsRouteImport } from './routes/member.transactions'
 import { Route as MemberStatementsRouteImport } from './routes/member.statements'
 import { Route as MemberProfileRouteImport } from './routes/member.profile'
+import { Route as MemberNotificationsRouteImport } from './routes/member.notifications'
 import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
@@ -77,6 +78,11 @@ const MemberStatementsRoute = MemberStatementsRouteImport.update({
 const MemberProfileRoute = MemberProfileRouteImport.update({
   id: '/member/profile',
   path: '/member/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberNotificationsRoute = MemberNotificationsRouteImport.update({
+  id: '/member/notifications',
+  path: '/member/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberLoansRoute = MemberLoansRouteImport.update({
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
   '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
   '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
   '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/notifications'
     | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/notifications'
     | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/notifications'
     | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   MemberContributionsRoute: typeof MemberContributionsRoute
   MemberHomeRoute: typeof MemberHomeRoute
   MemberLoansRoute: typeof MemberLoansRoute
+  MemberNotificationsRoute: typeof MemberNotificationsRoute
   MemberProfileRoute: typeof MemberProfileRoute
   MemberStatementsRoute: typeof MemberStatementsRoute
   MemberTransactionsRoute: typeof MemberTransactionsRoute
@@ -347,6 +360,13 @@ declare module '@tanstack/react-router' {
       path: '/member/profile'
       fullPath: '/member/profile'
       preLoaderRoute: typeof MemberProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/notifications': {
+      id: '/member/notifications'
+      path: '/member/notifications'
+      fullPath: '/member/notifications'
+      preLoaderRoute: typeof MemberNotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/loans': {
@@ -430,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemberContributionsRoute: MemberContributionsRoute,
   MemberHomeRoute: MemberHomeRoute,
   MemberLoansRoute: MemberLoansRoute,
+  MemberNotificationsRoute: MemberNotificationsRoute,
   MemberProfileRoute: MemberProfileRoute,
   MemberStatementsRoute: MemberStatementsRoute,
   MemberTransactionsRoute: MemberTransactionsRoute,
