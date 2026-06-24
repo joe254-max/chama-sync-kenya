@@ -15,10 +15,16 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
-import { Route as MemberTransactRouteImport } from './routes/member.transact'
+import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawals'
+import { Route as MemberTransactionsRouteImport } from './routes/member.transactions'
+import { Route as MemberStatementsRouteImport } from './routes/member.statements'
+import { Route as MemberProfileRouteImport } from './routes/member.profile'
+import { Route as MemberNotificationsRouteImport } from './routes/member.notifications'
+import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
+import { Route as MemberHelpRouteImport } from './routes/member.help'
+import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
 import { Route as MemberChamasRouteImport } from './routes/member.chamas'
-import { Route as MemberAnnouncementsRouteImport } from './routes/member.announcements'
 import { Route as MeetingNewRouteImport } from './routes/meeting.new'
 import { Route as MeetingSessionIdRouteImport } from './routes/meeting.$sessionId'
 import { Route as LoginOfficerRouteImport } from './routes/login.officer'
@@ -55,9 +61,34 @@ const ChamasIndexRoute = ChamasIndexRouteImport.update({
   path: '/chamas/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MemberTransactRoute = MemberTransactRouteImport.update({
-  id: '/member/transact',
-  path: '/member/transact',
+const MemberWithdrawalsRoute = MemberWithdrawalsRouteImport.update({
+  id: '/member/withdrawals',
+  path: '/member/withdrawals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberTransactionsRoute = MemberTransactionsRouteImport.update({
+  id: '/member/transactions',
+  path: '/member/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberStatementsRoute = MemberStatementsRouteImport.update({
+  id: '/member/statements',
+  path: '/member/statements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberProfileRoute = MemberProfileRouteImport.update({
+  id: '/member/profile',
+  path: '/member/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberNotificationsRoute = MemberNotificationsRouteImport.update({
+  id: '/member/notifications',
+  path: '/member/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberLoansRoute = MemberLoansRouteImport.update({
+  id: '/member/loans',
+  path: '/member/loans',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberHomeRoute = MemberHomeRouteImport.update({
@@ -65,14 +96,19 @@ const MemberHomeRoute = MemberHomeRouteImport.update({
   path: '/member/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemberHelpRoute = MemberHelpRouteImport.update({
+  id: '/member/help',
+  path: '/member/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberContributionsRoute = MemberContributionsRouteImport.update({
+  id: '/member/contributions',
+  path: '/member/contributions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MemberChamasRoute = MemberChamasRouteImport.update({
   id: '/member/chamas',
   path: '/member/chamas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MemberAnnouncementsRoute = MemberAnnouncementsRouteImport.update({
-  id: '/member/announcements',
-  path: '/member/announcements',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingNewRoute = MeetingNewRouteImport.update({
@@ -112,10 +148,16 @@ export interface FileRoutesByFullPath {
   '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
-  '/member/announcements': typeof MemberAnnouncementsRoute
   '/member/chamas': typeof MemberChamasRoute
+  '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
-  '/member/transact': typeof MemberTransactRoute
+  '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
+  '/member/profile': typeof MemberProfileRoute
+  '/member/statements': typeof MemberStatementsRoute
+  '/member/transactions': typeof MemberTransactionsRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -129,10 +171,16 @@ export interface FileRoutesByTo {
   '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
-  '/member/announcements': typeof MemberAnnouncementsRoute
   '/member/chamas': typeof MemberChamasRoute
+  '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
-  '/member/transact': typeof MemberTransactRoute
+  '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
+  '/member/profile': typeof MemberProfileRoute
+  '/member/statements': typeof MemberStatementsRoute
+  '/member/transactions': typeof MemberTransactionsRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas': typeof ChamasIndexRoute
 }
 export interface FileRoutesById {
@@ -147,10 +195,16 @@ export interface FileRoutesById {
   '/login/officer': typeof LoginOfficerRoute
   '/meeting/$sessionId': typeof MeetingSessionIdRoute
   '/meeting/new': typeof MeetingNewRoute
-  '/member/announcements': typeof MemberAnnouncementsRoute
   '/member/chamas': typeof MemberChamasRoute
+  '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
-  '/member/transact': typeof MemberTransactRoute
+  '/member/loans': typeof MemberLoansRoute
+  '/member/notifications': typeof MemberNotificationsRoute
+  '/member/profile': typeof MemberProfileRoute
+  '/member/statements': typeof MemberStatementsRoute
+  '/member/transactions': typeof MemberTransactionsRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRouteTypes {
@@ -166,10 +220,16 @@ export interface FileRouteTypes {
     | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
-    | '/member/announcements'
     | '/member/chamas'
+    | '/member/contributions'
+    | '/member/help'
     | '/member/home'
-    | '/member/transact'
+    | '/member/loans'
+    | '/member/notifications'
+    | '/member/profile'
+    | '/member/statements'
+    | '/member/transactions'
+    | '/member/withdrawals'
     | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -183,10 +243,16 @@ export interface FileRouteTypes {
     | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
-    | '/member/announcements'
     | '/member/chamas'
+    | '/member/contributions'
+    | '/member/help'
     | '/member/home'
-    | '/member/transact'
+    | '/member/loans'
+    | '/member/notifications'
+    | '/member/profile'
+    | '/member/statements'
+    | '/member/transactions'
+    | '/member/withdrawals'
     | '/chamas'
   id:
     | '__root__'
@@ -200,10 +266,16 @@ export interface FileRouteTypes {
     | '/login/officer'
     | '/meeting/$sessionId'
     | '/meeting/new'
-    | '/member/announcements'
     | '/member/chamas'
+    | '/member/contributions'
+    | '/member/help'
     | '/member/home'
-    | '/member/transact'
+    | '/member/loans'
+    | '/member/notifications'
+    | '/member/profile'
+    | '/member/statements'
+    | '/member/transactions'
+    | '/member/withdrawals'
     | '/chamas/'
   fileRoutesById: FileRoutesById
 }
@@ -218,10 +290,16 @@ export interface RootRouteChildren {
   LoginOfficerRoute: typeof LoginOfficerRoute
   MeetingSessionIdRoute: typeof MeetingSessionIdRoute
   MeetingNewRoute: typeof MeetingNewRoute
-  MemberAnnouncementsRoute: typeof MemberAnnouncementsRoute
   MemberChamasRoute: typeof MemberChamasRoute
+  MemberContributionsRoute: typeof MemberContributionsRoute
+  MemberHelpRoute: typeof MemberHelpRoute
   MemberHomeRoute: typeof MemberHomeRoute
-  MemberTransactRoute: typeof MemberTransactRoute
+  MemberLoansRoute: typeof MemberLoansRoute
+  MemberNotificationsRoute: typeof MemberNotificationsRoute
+  MemberProfileRoute: typeof MemberProfileRoute
+  MemberStatementsRoute: typeof MemberStatementsRoute
+  MemberTransactionsRoute: typeof MemberTransactionsRoute
+  MemberWithdrawalsRoute: typeof MemberWithdrawalsRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
 }
 
@@ -269,11 +347,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChamasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/member/transact': {
-      id: '/member/transact'
-      path: '/member/transact'
-      fullPath: '/member/transact'
-      preLoaderRoute: typeof MemberTransactRouteImport
+    '/member/withdrawals': {
+      id: '/member/withdrawals'
+      path: '/member/withdrawals'
+      fullPath: '/member/withdrawals'
+      preLoaderRoute: typeof MemberWithdrawalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/transactions': {
+      id: '/member/transactions'
+      path: '/member/transactions'
+      fullPath: '/member/transactions'
+      preLoaderRoute: typeof MemberTransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/statements': {
+      id: '/member/statements'
+      path: '/member/statements'
+      fullPath: '/member/statements'
+      preLoaderRoute: typeof MemberStatementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/profile': {
+      id: '/member/profile'
+      path: '/member/profile'
+      fullPath: '/member/profile'
+      preLoaderRoute: typeof MemberProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/notifications': {
+      id: '/member/notifications'
+      path: '/member/notifications'
+      fullPath: '/member/notifications'
+      preLoaderRoute: typeof MemberNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/loans': {
+      id: '/member/loans'
+      path: '/member/loans'
+      fullPath: '/member/loans'
+      preLoaderRoute: typeof MemberLoansRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/home': {
@@ -283,18 +396,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/member/help': {
+      id: '/member/help'
+      path: '/member/help'
+      fullPath: '/member/help'
+      preLoaderRoute: typeof MemberHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/contributions': {
+      id: '/member/contributions'
+      path: '/member/contributions'
+      fullPath: '/member/contributions'
+      preLoaderRoute: typeof MemberContributionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/member/chamas': {
       id: '/member/chamas'
       path: '/member/chamas'
       fullPath: '/member/chamas'
       preLoaderRoute: typeof MemberChamasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/member/announcements': {
-      id: '/member/announcements'
-      path: '/member/announcements'
-      fullPath: '/member/announcements'
-      preLoaderRoute: typeof MemberAnnouncementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meeting/new': {
@@ -346,10 +466,16 @@ const rootRouteChildren: RootRouteChildren = {
   LoginOfficerRoute: LoginOfficerRoute,
   MeetingSessionIdRoute: MeetingSessionIdRoute,
   MeetingNewRoute: MeetingNewRoute,
-  MemberAnnouncementsRoute: MemberAnnouncementsRoute,
   MemberChamasRoute: MemberChamasRoute,
+  MemberContributionsRoute: MemberContributionsRoute,
+  MemberHelpRoute: MemberHelpRoute,
   MemberHomeRoute: MemberHomeRoute,
-  MemberTransactRoute: MemberTransactRoute,
+  MemberLoansRoute: MemberLoansRoute,
+  MemberNotificationsRoute: MemberNotificationsRoute,
+  MemberProfileRoute: MemberProfileRoute,
+  MemberStatementsRoute: MemberStatementsRoute,
+  MemberTransactionsRoute: MemberTransactionsRoute,
+  MemberWithdrawalsRoute: MemberWithdrawalsRoute,
   ChamasIndexRoute: ChamasIndexRoute,
 }
 export const routeTree = rootRouteImport
