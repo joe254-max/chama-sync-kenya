@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
 import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawals'
+import { Route as MemberTransactionsRouteImport } from './routes/member.transactions'
 import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
@@ -59,6 +60,11 @@ const ChamasIndexRoute = ChamasIndexRouteImport.update({
 const MemberWithdrawalsRoute = MemberWithdrawalsRouteImport.update({
   id: '/member/withdrawals',
   path: '/member/withdrawals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberTransactionsRoute = MemberTransactionsRouteImport.update({
+  id: '/member/transactions',
+  path: '/member/transactions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberLoansRoute = MemberLoansRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas': typeof ChamasIndexRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas/'
   fileRoutesById: FileRoutesById
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   MemberContributionsRoute: typeof MemberContributionsRoute
   MemberHomeRoute: typeof MemberHomeRoute
   MemberLoansRoute: typeof MemberLoansRoute
+  MemberTransactionsRoute: typeof MemberTransactionsRoute
   MemberWithdrawalsRoute: typeof MemberWithdrawalsRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
 }
@@ -287,6 +300,13 @@ declare module '@tanstack/react-router' {
       path: '/member/withdrawals'
       fullPath: '/member/withdrawals'
       preLoaderRoute: typeof MemberWithdrawalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/transactions': {
+      id: '/member/transactions'
+      path: '/member/transactions'
+      fullPath: '/member/transactions'
+      preLoaderRoute: typeof MemberTransactionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/loans': {
@@ -370,6 +390,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemberContributionsRoute: MemberContributionsRoute,
   MemberHomeRoute: MemberHomeRoute,
   MemberLoansRoute: MemberLoansRoute,
+  MemberTransactionsRoute: MemberTransactionsRoute,
   MemberWithdrawalsRoute: MemberWithdrawalsRoute,
   ChamasIndexRoute: ChamasIndexRoute,
 }
