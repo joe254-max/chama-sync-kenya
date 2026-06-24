@@ -18,6 +18,7 @@ import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
 import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawals'
 import { Route as MemberTransactionsRouteImport } from './routes/member.transactions'
 import { Route as MemberStatementsRouteImport } from './routes/member.statements'
+import { Route as MemberProfileRouteImport } from './routes/member.profile'
 import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
@@ -71,6 +72,11 @@ const MemberTransactionsRoute = MemberTransactionsRouteImport.update({
 const MemberStatementsRoute = MemberStatementsRouteImport.update({
   id: '/member/statements',
   path: '/member/statements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberProfileRoute = MemberProfileRouteImport.update({
+  id: '/member/profile',
+  path: '/member/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberLoansRoute = MemberLoansRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/profile': typeof MemberProfileRoute
   '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/profile'
     | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
@@ -258,6 +270,7 @@ export interface RootRouteChildren {
   MemberContributionsRoute: typeof MemberContributionsRoute
   MemberHomeRoute: typeof MemberHomeRoute
   MemberLoansRoute: typeof MemberLoansRoute
+  MemberProfileRoute: typeof MemberProfileRoute
   MemberStatementsRoute: typeof MemberStatementsRoute
   MemberTransactionsRoute: typeof MemberTransactionsRoute
   MemberWithdrawalsRoute: typeof MemberWithdrawalsRoute
@@ -327,6 +340,13 @@ declare module '@tanstack/react-router' {
       path: '/member/statements'
       fullPath: '/member/statements'
       preLoaderRoute: typeof MemberStatementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/profile': {
+      id: '/member/profile'
+      path: '/member/profile'
+      fullPath: '/member/profile'
+      preLoaderRoute: typeof MemberProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/loans': {
@@ -410,6 +430,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemberContributionsRoute: MemberContributionsRoute,
   MemberHomeRoute: MemberHomeRoute,
   MemberLoansRoute: MemberLoansRoute,
+  MemberProfileRoute: MemberProfileRoute,
   MemberStatementsRoute: MemberStatementsRoute,
   MemberTransactionsRoute: MemberTransactionsRoute,
   MemberWithdrawalsRoute: MemberWithdrawalsRoute,
