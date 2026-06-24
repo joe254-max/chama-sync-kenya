@@ -15,6 +15,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
+import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawals'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
 import { Route as MemberChamasRouteImport } from './routes/member.chamas'
@@ -52,6 +53,11 @@ const IndexRoute = IndexRouteImport.update({
 const ChamasIndexRoute = ChamasIndexRouteImport.update({
   id: '/chamas/',
   path: '/chamas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberWithdrawalsRoute = MemberWithdrawalsRouteImport.update({
+  id: '/member/withdrawals',
+  path: '/member/withdrawals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberHomeRoute = MemberHomeRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas': typeof ChamasIndexRoute
 }
 export interface FileRoutesById {
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
+  '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/member/chamas'
     | '/member/contributions'
     | '/member/home'
+    | '/member/withdrawals'
     | '/chamas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/member/chamas'
     | '/member/contributions'
     | '/member/home'
+    | '/member/withdrawals'
     | '/chamas'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/member/chamas'
     | '/member/contributions'
     | '/member/home'
+    | '/member/withdrawals'
     | '/chamas/'
   fileRoutesById: FileRoutesById
 }
@@ -209,6 +221,7 @@ export interface RootRouteChildren {
   MemberChamasRoute: typeof MemberChamasRoute
   MemberContributionsRoute: typeof MemberContributionsRoute
   MemberHomeRoute: typeof MemberHomeRoute
+  MemberWithdrawalsRoute: typeof MemberWithdrawalsRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
 }
 
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/chamas'
       fullPath: '/chamas/'
       preLoaderRoute: typeof ChamasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/withdrawals': {
+      id: '/member/withdrawals'
+      path: '/member/withdrawals'
+      fullPath: '/member/withdrawals'
+      preLoaderRoute: typeof MemberWithdrawalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/home': {
@@ -329,6 +349,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemberChamasRoute: MemberChamasRoute,
   MemberContributionsRoute: MemberContributionsRoute,
   MemberHomeRoute: MemberHomeRoute,
+  MemberWithdrawalsRoute: MemberWithdrawalsRoute,
   ChamasIndexRoute: ChamasIndexRoute,
 }
 export const routeTree = rootRouteImport
