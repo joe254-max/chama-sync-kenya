@@ -22,6 +22,7 @@ import { Route as MemberProfileRouteImport } from './routes/member.profile'
 import { Route as MemberNotificationsRouteImport } from './routes/member.notifications'
 import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
+import { Route as MemberHelpRouteImport } from './routes/member.help'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
 import { Route as MemberChamasRouteImport } from './routes/member.chamas'
 import { Route as MeetingNewRouteImport } from './routes/meeting.new'
@@ -95,6 +96,11 @@ const MemberHomeRoute = MemberHomeRouteImport.update({
   path: '/member/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemberHelpRoute = MemberHelpRouteImport.update({
+  id: '/member/help',
+  path: '/member/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MemberContributionsRoute = MemberContributionsRouteImport.update({
   id: '/member/contributions',
   path: '/member/contributions',
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/meeting/new': typeof MeetingNewRoute
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
   '/member/notifications': typeof MemberNotificationsRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/meeting/new': typeof MeetingNewRoute
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
   '/member/notifications': typeof MemberNotificationsRoute
@@ -189,6 +197,7 @@ export interface FileRoutesById {
   '/meeting/new': typeof MeetingNewRoute
   '/member/chamas': typeof MemberChamasRoute
   '/member/contributions': typeof MemberContributionsRoute
+  '/member/help': typeof MemberHelpRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
   '/member/notifications': typeof MemberNotificationsRoute
@@ -213,6 +222,7 @@ export interface FileRouteTypes {
     | '/meeting/new'
     | '/member/chamas'
     | '/member/contributions'
+    | '/member/help'
     | '/member/home'
     | '/member/loans'
     | '/member/notifications'
@@ -235,6 +245,7 @@ export interface FileRouteTypes {
     | '/meeting/new'
     | '/member/chamas'
     | '/member/contributions'
+    | '/member/help'
     | '/member/home'
     | '/member/loans'
     | '/member/notifications'
@@ -257,6 +268,7 @@ export interface FileRouteTypes {
     | '/meeting/new'
     | '/member/chamas'
     | '/member/contributions'
+    | '/member/help'
     | '/member/home'
     | '/member/loans'
     | '/member/notifications'
@@ -280,6 +292,7 @@ export interface RootRouteChildren {
   MeetingNewRoute: typeof MeetingNewRoute
   MemberChamasRoute: typeof MemberChamasRoute
   MemberContributionsRoute: typeof MemberContributionsRoute
+  MemberHelpRoute: typeof MemberHelpRoute
   MemberHomeRoute: typeof MemberHomeRoute
   MemberLoansRoute: typeof MemberLoansRoute
   MemberNotificationsRoute: typeof MemberNotificationsRoute
@@ -383,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MemberHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/member/help': {
+      id: '/member/help'
+      path: '/member/help'
+      fullPath: '/member/help'
+      preLoaderRoute: typeof MemberHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/member/contributions': {
       id: '/member/contributions'
       path: '/member/contributions'
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   MeetingNewRoute: MeetingNewRoute,
   MemberChamasRoute: MemberChamasRoute,
   MemberContributionsRoute: MemberContributionsRoute,
+  MemberHelpRoute: MemberHelpRoute,
   MemberHomeRoute: MemberHomeRoute,
   MemberLoansRoute: MemberLoansRoute,
   MemberNotificationsRoute: MemberNotificationsRoute,
