@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChamasIndexRouteImport } from './routes/chamas.index'
 import { Route as MemberWithdrawalsRouteImport } from './routes/member.withdrawals'
 import { Route as MemberTransactionsRouteImport } from './routes/member.transactions'
+import { Route as MemberStatementsRouteImport } from './routes/member.statements'
 import { Route as MemberLoansRouteImport } from './routes/member.loans'
 import { Route as MemberHomeRouteImport } from './routes/member.home'
 import { Route as MemberContributionsRouteImport } from './routes/member.contributions'
@@ -65,6 +66,11 @@ const MemberWithdrawalsRoute = MemberWithdrawalsRouteImport.update({
 const MemberTransactionsRoute = MemberTransactionsRouteImport.update({
   id: '/member/transactions',
   path: '/member/transactions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberStatementsRoute = MemberStatementsRouteImport.update({
+  id: '/member/statements',
+  path: '/member/statements',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MemberLoansRoute = MemberLoansRouteImport.update({
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas': typeof ChamasIndexRoute
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/member/contributions': typeof MemberContributionsRoute
   '/member/home': typeof MemberHomeRoute
   '/member/loans': typeof MemberLoansRoute
+  '/member/statements': typeof MemberStatementsRoute
   '/member/transactions': typeof MemberTransactionsRoute
   '/member/withdrawals': typeof MemberWithdrawalsRoute
   '/chamas/': typeof ChamasIndexRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas/'
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas'
@@ -226,6 +237,7 @@ export interface FileRouteTypes {
     | '/member/contributions'
     | '/member/home'
     | '/member/loans'
+    | '/member/statements'
     | '/member/transactions'
     | '/member/withdrawals'
     | '/chamas/'
@@ -246,6 +258,7 @@ export interface RootRouteChildren {
   MemberContributionsRoute: typeof MemberContributionsRoute
   MemberHomeRoute: typeof MemberHomeRoute
   MemberLoansRoute: typeof MemberLoansRoute
+  MemberStatementsRoute: typeof MemberStatementsRoute
   MemberTransactionsRoute: typeof MemberTransactionsRoute
   MemberWithdrawalsRoute: typeof MemberWithdrawalsRoute
   ChamasIndexRoute: typeof ChamasIndexRoute
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       path: '/member/transactions'
       fullPath: '/member/transactions'
       preLoaderRoute: typeof MemberTransactionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member/statements': {
+      id: '/member/statements'
+      path: '/member/statements'
+      fullPath: '/member/statements'
+      preLoaderRoute: typeof MemberStatementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/member/loans': {
@@ -390,6 +410,7 @@ const rootRouteChildren: RootRouteChildren = {
   MemberContributionsRoute: MemberContributionsRoute,
   MemberHomeRoute: MemberHomeRoute,
   MemberLoansRoute: MemberLoansRoute,
+  MemberStatementsRoute: MemberStatementsRoute,
   MemberTransactionsRoute: MemberTransactionsRoute,
   MemberWithdrawalsRoute: MemberWithdrawalsRoute,
   ChamasIndexRoute: ChamasIndexRoute,
