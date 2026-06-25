@@ -44,7 +44,7 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
         style={{ paddingLeft: sidebarWidth }}
       >
         <aside
-          className="fixed left-0 top-0 hidden h-screen flex-col overflow-hidden bg-[#aa0202] px-3 pb-4 pt-4 text-white transition-all duration-300 xl:flex"
+          className="sticky top-0 hidden h-screen flex-col overflow-hidden bg-[#aa0202] px-3 pb-4 pt-4 text-white transition-all duration-300 xl:flex"
           style={{ width: sidebarWidth }}
         >
           <button
