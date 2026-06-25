@@ -187,13 +187,14 @@ function MemberLogin() {
             <ArrowLeft className="h-4 w-4" /> Back
           </Link>
 
-        <Card className="mt-6 border-white/20 bg-card/40 shadow-2xl backdrop-blur-xl">
+        <Card className="mt-6 border border-white/20 bg-white/95 text-black shadow-[0_30px_80px_-20px_rgba(0,0,0,0.55),0_8px_24px_-12px_rgba(170,2,2,0.45)] backdrop-blur-xl">
           <CardHeader className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[oklch(0.65_0.18_300)]/10 text-[oklch(0.55_0.2_300)]">
-              <Wallet className="h-6 w-6" />
+            <div className="mx-auto relative grid h-16 w-16 place-items-center rounded-full bg-[#aa0202] ring-1 ring-black/10 shadow-[0_12px_28px_-10px_rgba(170,2,2,0.6),inset_0_0_0_1px_rgba(255,255,255,0.2)]">
+              <span className="pointer-events-none absolute inset-1 rounded-full border border-white/30" />
+              <Wallet className="relative h-7 w-7 text-white" />
             </div>
-            <CardTitle className="mt-2">Member Access</CardTitle>
-            <CardDescription>Sign in or create your member account</CardDescription>
+            <CardTitle className="mt-3 text-black">Member Access</CardTitle>
+            <CardDescription className="text-neutral-600">Sign in or create your member account</CardDescription>
           </CardHeader>
           <CardContent>
             {bioAvailable && bioEnrolled && (
@@ -224,7 +225,7 @@ function MemberLogin() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" autoComplete="current-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
-                  <Button type="submit" className="h-12 w-full bg-[oklch(0.55_0.2_300)] text-white hover:bg-[oklch(0.5_0.2_300)]" disabled={busy}>
+                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Login as Member"}
                   </Button>
                   <button type="button" onClick={forgotPassword} className="block w-full text-center text-sm text-muted-foreground hover:text-primary">
@@ -247,7 +248,7 @@ function MemberLogin() {
                     <Label htmlFor="su-password">Password</Label>
                     <Input id="su-password" type="password" minLength={6} autoComplete="new-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
-                  <Button type="submit" className="h-12 w-full bg-[oklch(0.55_0.2_300)] text-white hover:bg-[oklch(0.5_0.2_300)]" disabled={busy}>
+                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Create member account"}
                   </Button>
                   <p className="text-center text-xs text-muted-foreground">
