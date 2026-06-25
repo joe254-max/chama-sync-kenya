@@ -44,26 +44,26 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
         style={{ gridTemplateColumns: `${sidebarWidth} 1fr` }}
       >
         <aside
-          className="sticky top-0 hidden h-screen flex-col bg-[linear-gradient(180deg,#b90000_0%,#ae0000_60%,#9f0000_100%)] px-3 pb-6 pt-6 text-white transition-all duration-300 xl:flex"
+          className="sticky top-0 hidden h-screen flex-col overflow-hidden bg-[#aa0202] px-3 pb-4 pt-4 text-white transition-all duration-300 xl:flex"
           style={{ width: sidebarWidth }}
         >
           <button
             onClick={() => setCollapsed((c) => !c)}
-            className="absolute -right-3 top-8 z-10 grid h-7 w-7 place-items-center rounded-full border border-red-200 bg-white text-red-600 shadow-md hover:bg-red-50"
+            className="absolute -right-3 top-6 z-10 grid h-7 w-7 place-items-center rounded-full border border-red-200 bg-white text-red-600 shadow-md hover:bg-red-50"
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </button>
 
-          <div className={`flex flex-col items-center pb-6 text-center ${collapsed ? "px-0" : "px-3 pt-2"}`}>
+          <div className={`flex flex-col items-center pb-4 text-center ${collapsed ? "px-0" : "px-3 pt-1"}`}>
             <img
               src={logoAsset.url}
               alt="M-Chama"
-              className={`object-contain transition-all duration-300 ${collapsed ? "h-12 w-12 rounded-lg" : "h-28 w-auto"}`}
+              className={`object-contain transition-all duration-300 ${collapsed ? "h-10 w-10 rounded-lg" : "h-20 w-auto"}`}
             />
           </div>
 
-          <nav className="flex-1 space-y-1.5 overflow-y-auto">
+          <nav className="flex-1 space-y-1 overflow-hidden">
             {navItems.map((item) => {
               const active = pathname === item.to;
               const Icon = item.icon;
@@ -72,9 +72,9 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
                   key={item.to}
                   to={item.to}
                   title={collapsed ? item.label : undefined}
-                  className={`flex items-center gap-3 rounded-[14px] ${collapsed ? "justify-center px-2 py-3" : "px-5 py-4"} text-[15px] font-medium transition ${active ? "bg-white text-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.12)]" : "text-white hover:bg-white/10"}`}
+                  className={`flex items-center gap-3 rounded-[12px] ${collapsed ? "justify-center px-2 py-2.5" : "px-4 py-2.5"} text-[14px] font-medium transition ${active ? "bg-white text-red-600 shadow-[0_6px_18px_rgba(0,0,0,0.12)]" : "text-white hover:bg-white/10"}`}
                 >
-                  <Icon className="h-5 w-5 shrink-0" />
+                  <Icon className="h-[18px] w-[18px] shrink-0" />
                   {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
                   {!collapsed && item.badge ? (
                     <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] text-white">{item.badge}</span>
@@ -87,9 +87,9 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
           <button
             onClick={async () => { await signOut(); navigate({ to: "/" }); }}
             title={collapsed ? "Log Out" : undefined}
-            className={`mt-4 flex items-center gap-3 rounded-[14px] ${collapsed ? "justify-center px-2 py-3" : "px-5 py-4"} text-left text-[15px] font-medium text-white hover:bg-white/10`}
+            className={`mt-2 flex items-center gap-3 rounded-[12px] ${collapsed ? "justify-center px-2 py-2.5" : "px-4 py-2.5"} text-left text-[14px] font-medium text-white hover:bg-white/10`}
           >
-            <LogOut className="h-5 w-5 shrink-0" />
+            <LogOut className="h-[18px] w-[18px] shrink-0" />
             {!collapsed && "Log Out"}
           </button>
         </aside>
