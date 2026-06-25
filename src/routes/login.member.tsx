@@ -187,13 +187,14 @@ function MemberLogin() {
             <ArrowLeft className="h-4 w-4" /> Back
           </Link>
 
-        <Card className="mt-6 border-white/20 bg-card/40 shadow-2xl backdrop-blur-xl">
+        <Card className="mt-6 border border-white/20 bg-white/95 text-black shadow-[0_30px_80px_-20px_rgba(0,0,0,0.55),0_8px_24px_-12px_rgba(170,2,2,0.45)] backdrop-blur-xl">
           <CardHeader className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#aa0202]/10 text-[#aa0202]">
-              <Wallet className="h-6 w-6" />
+            <div className="mx-auto relative grid h-16 w-16 place-items-center rounded-full bg-[#aa0202] ring-1 ring-black/10 shadow-[0_12px_28px_-10px_rgba(170,2,2,0.6),inset_0_0_0_1px_rgba(255,255,255,0.2)]">
+              <span className="pointer-events-none absolute inset-1 rounded-full border border-white/30" />
+              <Wallet className="relative h-7 w-7 text-white" />
             </div>
-            <CardTitle className="mt-2">Member Access</CardTitle>
-            <CardDescription>Sign in or create your member account</CardDescription>
+            <CardTitle className="mt-3 text-black">Member Access</CardTitle>
+            <CardDescription className="text-neutral-600">Sign in or create your member account</CardDescription>
           </CardHeader>
           <CardContent>
             {bioAvailable && bioEnrolled && (
