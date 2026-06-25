@@ -1,9 +1,9 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Bell, ChevronDown, CreditCard, HandCoins, HelpCircle, LayoutDashboard, LogOut, ReceiptText, ScrollText, Search, Users, UserRound, WalletCards } from "lucide-react";
+import { Bell, ChevronDown, ChevronLeft, ChevronRight, CreditCard, HandCoins, HelpCircle, LayoutDashboard, LogOut, ReceiptText, ScrollText, Search, Users, UserRound, WalletCards } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import logo from "@/assets/logo.png";
+import logoAsset from "@/assets/mchama-logo.png.asset.json";
 
 type NavItem = { label: string; to: string; icon: LucideIcon; badge?: string };
 
@@ -24,6 +24,7 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const { user, loading, roles, isOfficer, signOut } = useAuth();
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     if (loading) return;
@@ -34,14 +35,35 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
   const displayName = (user?.user_metadata?.full_name as string) ?? "John Kamau";
   const avatarLetter = displayName.charAt(0).toUpperCase();
 
+  const sidebarWidth = collapsed ? "80px" : "244px";
+
   return (
     <div className="min-h-screen bg-[#fbfbfd] text-slate-900">
-      <div className="mx-auto grid min-h-screen max-w-[1536px] xl:grid-cols-[244px_1fr]">
-        <aside className="hidden min-h-screen flex-col bg-[linear-gradient(180deg,#b90000_0%,#ae0000_60%,#9f0000_100%)] px-4 pb-8 pt-8 text-white xl:flex">
-          <div className="flex flex-col items-center px-3 pb-8 pt-2 text-center">
-            <img src={logo} alt="M-Chama" className="h-24 w-auto object-contain brightness-0 invert" />
+      <div
+        className="mx-auto min-h-screen max-w-[1536px] xl:grid"
+        style={{ gridTemplateColumns: `${sidebarWidth} 1fr` }}
+      >
+        <aside
+          className="sticky top-0 hidden h-screen flex-col bg-[linear-gradient(180deg,#b90000_0%,#ae0000_60%,#9f0000_100%)] px-3 pb-6 pt-6 text-white transition-all duration-300 xl:flex"
+          style={{ width: sidebarWidth }}
+        >
+          <button
+            onClick={() => setCollapsed((c) => !c)}
+            className="absolute -right-3 top-8 z-10 grid h-7 w-7 place-items-center rounded-full border border-red-200 bg-white text-red-600 shadow-md hover:bg-red-50"
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          </button>
+
+          <div className={`flex flex-col items-center pb-6 text-center ${collapsed ? "px-0" : "px-3 pt-2"}`}>
+            <img
+              src={logoAsset.url}
+              alt="M-Chama"
+              className={`object-contain transition-all duration-300 ${collapsed ? "h-12 w-12 rounded-lg" : "h-28 w-auto"}`}
+            />
           </div>
-          <nav className="space-y-2">
+
+          <nav className="flex-1 space-y-1.5 overflow-y-auto">
             {navItems.map((item) => {
               const active = pathname === item.to;
               const Icon = item.icon;
@@ -49,18 +71,26 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`flex items-center gap-3 rounded-[14px] px-5 py-4 text-[15px] font-medium transition ${active ? "bg-white text-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.12)]" : "text-white hover:bg-white/10"}`}
+                  title={collapsed ? item.label : undefined}
+                  className={`flex items-center gap-3 rounded-[14px] ${collapsed ? "justify-center px-2 py-3" : "px-5 py-4"} text-[15px] font-medium transition ${active ? "bg-white text-red-600 shadow-[0_10px_30px_rgba(0,0,0,0.12)]" : "text-white hover:bg-white/10"}`}
                 >
-                  <Icon className="h-5 w-5" />
-                  <span className="flex-1">{item.label}</span>
-                  {item.badge ? <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] text-white">{item.badge}</span> : null}
+                  <Icon className="h-5 w-5 shrink-0" />
+                  {!collapsed && <span className="flex-1 truncate">{item.label}</span>}
+                  {!collapsed && item.badge ? (
+                    <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] text-white">{item.badge}</span>
+                  ) : null}
                 </Link>
               );
             })}
           </nav>
-          <button onClick={async () => { await signOut(); navigate({ to: "/" }); }} className="mt-auto flex items-center gap-3 px-5 py-4 text-left text-[15px] font-medium text-white hover:bg-white/10 rounded-[14px]">
-            <LogOut className="h-5 w-5" />
-            Log Out
+
+          <button
+            onClick={async () => { await signOut(); navigate({ to: "/" }); }}
+            title={collapsed ? "Log Out" : undefined}
+            className={`mt-4 flex items-center gap-3 rounded-[14px] ${collapsed ? "justify-center px-2 py-3" : "px-5 py-4"} text-left text-[15px] font-medium text-white hover:bg-white/10`}
+          >
+            <LogOut className="h-5 w-5 shrink-0" />
+            {!collapsed && "Log Out"}
           </button>
         </aside>
 
