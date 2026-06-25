@@ -40,8 +40,8 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#fbfbfd] text-slate-900">
       <div
-        className="mx-auto min-h-screen max-w-[1536px]"
-        style={{ paddingLeft: sidebarWidth }}
+        className="mx-auto min-h-screen max-w-[1536px] xl:grid"
+        style={{ gridTemplateColumns: `${sidebarWidth} 1fr` }}
       >
         <aside
           className="sticky top-0 hidden h-screen flex-col overflow-hidden bg-[#aa0202] px-3 pb-4 pt-4 text-white transition-all duration-300 xl:flex"
