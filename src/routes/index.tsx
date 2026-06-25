@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { ClipboardList, Wallet, ArrowRight } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logoAsset from "@/assets/mchama-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Landing,
