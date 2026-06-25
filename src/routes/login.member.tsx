@@ -225,7 +225,7 @@ function MemberLogin() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" autoComplete="current-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
-                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101]" disabled={busy}>
+                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Login as Member"}
                   </Button>
                   <button type="button" onClick={forgotPassword} className="block w-full text-center text-sm text-muted-foreground hover:text-primary">
@@ -248,7 +248,7 @@ function MemberLogin() {
                     <Label htmlFor="su-password">Password</Label>
                     <Input id="su-password" type="password" minLength={6} autoComplete="new-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
-                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101]" disabled={busy}>
+                  <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Create member account"}
                   </Button>
                   <p className="text-center text-xs text-muted-foreground">
