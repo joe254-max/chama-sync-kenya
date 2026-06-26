@@ -187,11 +187,11 @@ function MemberLogin() {
 
         <Card className="mt-6 border border-white/20 bg-white/95 text-black shadow-[0_30px_80px_-20px_rgba(0,0,0,0.55),0_8px_24px_-12px_rgba(170,2,2,0.45)] backdrop-blur-xl">
           <CardHeader className="text-center">
-            <div className="mx-auto relative grid h-16 w-16 place-items-center rounded-full bg-[#aa0202] ring-1 ring-black/10 shadow-[0_12px_28px_-10px_rgba(170,2,2,0.6),inset_0_0_0_1px_rgba(255,255,255,0.2)]">
+            <div className="smokey-red-shadow mx-auto relative grid h-20 w-20 place-items-center overflow-hidden rounded-full bg-[#aa0202] ring-1 ring-black/10">
               <span className="pointer-events-none absolute inset-1 rounded-full border border-white/30" />
-              <Wallet className="relative h-7 w-7 text-white" />
+              <img src={logoAsset.url} alt="M-Chama" className="relative h-16 w-16 object-contain" />
             </div>
-            <CardTitle className="mt-3 text-black">Member Access</CardTitle>
+            <CardTitle className="mt-3 text-[#aa0202]">Member Access</CardTitle>
             <CardDescription className="text-neutral-600">Sign in or create your member account</CardDescription>
           </CardHeader>
           <CardContent>
@@ -221,7 +221,7 @@ function MemberLogin() {
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" type="password" autoComplete="current-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <PasswordInput id="password" autoComplete="current-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
                   <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Login as Member"}
@@ -244,7 +244,7 @@ function MemberLogin() {
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="su-password">Password</Label>
-                    <Input id="su-password" type="password" minLength={6} autoComplete="new-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <PasswordInput id="su-password" minLength={6} autoComplete="new-password" className="h-12" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </div>
                   <Button type="submit" className="h-12 w-full bg-[#aa0202] text-white hover:bg-[#7a0101] shadow-[0_10px_24px_-10px_rgba(170,2,2,0.6)]" disabled={busy}>
                     {busy ? <Loader2 className="h-5 w-5 animate-spin" /> : "Create member account"}
