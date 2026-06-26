@@ -113,14 +113,6 @@ function MemberLogin() {
     toast.success("Password reset link sent. Check your email.");
   };
 
-  const forgotPassword = async () => {
-    if (!email) return toast.error("Enter your email first");
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/login/member`,
-    });
-    if (error) return toast.error(error.message);
-    toast.success("Password reset link sent. Check your email.");
-  };
 
   const quickUnlock = async () => {
     try {
