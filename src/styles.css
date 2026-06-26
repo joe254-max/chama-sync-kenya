@@ -128,3 +128,28 @@
     color: var(--color-foreground);
   }
 }
+
+@keyframes smokeyRed {
+  0%, 100% {
+    box-shadow:
+      0 0 30px 6px rgba(170, 2, 2, 0.55),
+      0 0 60px 18px rgba(170, 2, 2, 0.35),
+      0 0 90px 36px rgba(170, 2, 2, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 45px 10px rgba(220, 30, 30, 0.7),
+      0 0 90px 30px rgba(170, 2, 2, 0.45),
+      0 0 140px 60px rgba(170, 2, 2, 0.22);
+  }
+}
+.smokey-red-shadow {
+  animation: smokeyRed 4s ease-in-out infinite;
+}
+
+@keyframes smokeyDrift {
+  0% { transform: translate(0,0) scale(1); opacity: .22; }
+  50% { transform: translate(8px,-6px) scale(1.04); opacity: .32; }
+  100% { transform: translate(0,0) scale(1); opacity: .22; }
+}
+.smokey-drift { animation: smokeyDrift 9s ease-in-out infinite; }

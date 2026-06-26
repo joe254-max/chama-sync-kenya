@@ -23,12 +23,12 @@ function Landing() {
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md flex-col">
         {/* Logo */}
         <div className="flex flex-col items-center text-center">
-          <div className="relative grid h-32 w-32 place-items-center rounded-full bg-[#aa0202] ring-1 ring-black/10 shadow-[0_18px_40px_-12px_rgba(170,2,2,0.55),inset_0_0_0_1px_rgba(255,255,255,0.18)]">
+          <div className="smokey-red-shadow relative grid h-32 w-32 place-items-center overflow-hidden rounded-full bg-[#aa0202] ring-1 ring-black/10">
             <span className="pointer-events-none absolute inset-1.5 rounded-full border border-white/30" />
             <span className="pointer-events-none absolute inset-3 rounded-full border border-white/15" />
             <img src={logoAsset.url} alt="M-Chama logo" className="relative h-24 w-24 object-contain" />
           </div>
-          <p className="mt-3 text-sm font-medium text-[#aa0202]">Together We Grow</p>
+          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-[#aa0202]">Together We Grow</p>
         </div>
 
         {/* Heading */}

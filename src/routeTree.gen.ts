@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as MembersRouteImport } from './routes/members'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -31,6 +32,11 @@ import { Route as LoginOfficerRouteImport } from './routes/login.officer'
 import { Route as LoginMemberRouteImport } from './routes/login.member'
 import { Route as ChamasChamaIdRouteImport } from './routes/chamas.$chamaId'
 
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
   '/login/member': typeof LoginMemberRoute
   '/login/officer': typeof LoginOfficerRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
   '/login/member': typeof LoginMemberRoute
   '/login/officer': typeof LoginOfficerRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/members': typeof MembersRoute
   '/reports': typeof ReportsRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/chamas/$chamaId': typeof ChamasChamaIdRoute
   '/login/member': typeof LoginMemberRoute
   '/login/officer': typeof LoginOfficerRoute
@@ -215,6 +224,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/members'
     | '/reports'
+    | '/reset-password'
     | '/chamas/$chamaId'
     | '/login/member'
     | '/login/officer'
@@ -238,6 +248,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/members'
     | '/reports'
+    | '/reset-password'
     | '/chamas/$chamaId'
     | '/login/member'
     | '/login/officer'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/members'
     | '/reports'
+    | '/reset-password'
     | '/chamas/$chamaId'
     | '/login/member'
     | '/login/officer'
@@ -285,6 +297,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   MembersRoute: typeof MembersRoute
   ReportsRoute: typeof ReportsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ChamasChamaIdRoute: typeof ChamasChamaIdRoute
   LoginMemberRoute: typeof LoginMemberRoute
   LoginOfficerRoute: typeof LoginOfficerRoute
@@ -305,6 +318,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reports': {
       id: '/reports'
       path: '/reports'
@@ -461,6 +481,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   MembersRoute: MembersRoute,
   ReportsRoute: ReportsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ChamasChamaIdRoute: ChamasChamaIdRoute,
   LoginMemberRoute: LoginMemberRoute,
   LoginOfficerRoute: LoginOfficerRoute,
