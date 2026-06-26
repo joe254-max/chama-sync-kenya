@@ -8,8 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ArrowLeft, Wallet, Loader2, Fingerprint } from "lucide-react";
+import { ArrowLeft, Loader2, Fingerprint } from "lucide-react";
 import { LoginBackdrop, LoginTagline } from "@/components/LoginBackdrop";
+import { PasswordInput } from "@/components/PasswordInput";
+import logoAsset from "@/assets/mchama-logo.png.asset.json";
 import {
   isBiometricAvailable,
   hasBiometricEnrolled,
@@ -89,22 +91,26 @@ function MemberLogin() {
   const signUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/member/home`,
+        emailRedirectTo: `${window.location.origin}/login/member`,
         data: { full_name: fullName },
       },
     });
-    if (error) { setBusy(false); return toast.error(error.message); }
-    if (data.session && data.user) {
-      toast.success("Account created! Welcome.");
-      await finishMemberLogin(data.user.id, data.user.email ?? email);
-    } else {
-      toast.success("Account created. Check your email to confirm, then sign in.");
-    }
     setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("Account created! Check your email to verify, then sign in.");
+  };
+
+  const forgotPassword = async () => {
+    if (!email) return toast.error("Enter your email first");
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (error) return toast.error(error.message);
+    toast.success("Password reset link sent. Check your email.");
   };
 
   const forgotPassword = async () => {
