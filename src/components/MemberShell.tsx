@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import { Bell, ChevronDown, ChevronLeft, ChevronRight, CreditCard, HandCoins, HelpCircle, LayoutDashboard, LogOut, ReceiptText, ScrollText, Search, Users, UserRound, WalletCards } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import logoAsset from "@/assets/mchama-logo.png.asset.json";
+import logoWhiteAsset from "@/assets/mchama-logo-white.png.asset.json";
 
 type NavItem = { label: string; to: string; icon: LucideIcon; badge?: string };
 
@@ -47,6 +48,13 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
           className="sticky top-0 hidden h-screen flex-col overflow-hidden bg-[#aa0202] px-3 pb-4 pt-4 text-white transition-all duration-300 xl:flex"
           style={{ width: sidebarWidth }}
         >
+          {/* Watermark logo */}
+          <img
+            src={logoWhiteAsset.url}
+            alt=""
+            aria-hidden
+            className="smokey-drift pointer-events-none absolute inset-0 m-auto h-[85%] w-[85%] object-contain opacity-[0.08]"
+          />
           <button
             onClick={() => setCollapsed((c) => !c)}
             className="absolute -right-3 top-6 z-10 grid h-7 w-7 place-items-center rounded-full border border-red-200 bg-white text-red-600 shadow-md hover:bg-red-50"
