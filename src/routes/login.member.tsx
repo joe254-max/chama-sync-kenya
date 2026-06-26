@@ -35,6 +35,9 @@ function MemberLogin() {
   const [bioEnrolled, setBioEnrolled] = useState(false);
   const [askEnroll, setAskEnroll] = useState(false);
   const [pendingSession, setPendingSession] = useState<{ access_token: string; refresh_token: string; userId: string; email: string } | null>(null);
+  const [verifyPending, setVerifyPending] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   useEffect(() => {
     isBiometricAvailable().then((ok) => {
@@ -42,6 +45,12 @@ function MemberLogin() {
       setBioEnrolled(ok && hasBiometricEnrolled());
     });
   }, []);
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendCooldown]);
 
   useEffect(() => {
     if (loading || !user) return;
@@ -83,7 +92,15 @@ function MemberLogin() {
     e.preventDefault();
     setBusy(true);
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) { setBusy(false); return toast.error(error.message); }
+    if (error) {
+      setBusy(false);
+      if (error.message.toLowerCase().includes("email not confirmed") || error.message.toLowerCase().includes("not verified")) {
+        setVerifyEmail(email);
+        setVerifyPending(true);
+        return toast.error("Please verify your email before signing in.");
+      }
+      return toast.error(error.message);
+    }
     await finishMemberLogin(data.user.id, data.user.email ?? email);
     setBusy(false);
   };
@@ -101,6 +118,8 @@ function MemberLogin() {
     });
     setBusy(false);
     if (error) return toast.error(error.message);
+    setVerifyEmail(email);
+    setVerifyPending(true);
     toast.success("Account created! Check your email to verify, then sign in.");
   };
 
@@ -113,6 +132,15 @@ function MemberLogin() {
     toast.success("Password reset link sent. Check your email.");
   };
 
+  const resendVerification = async () => {
+    if (resendCooldown > 0 || !verifyEmail) return;
+    setBusy(true);
+    const { error } = await supabase.auth.resend({ type: "signup", email: verifyEmail });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("Verification email resent. Check your inbox.");
+    setResendCooldown(60);
+  };
 
   const quickUnlock = async () => {
     try {
@@ -195,6 +223,23 @@ function MemberLogin() {
             <CardDescription className="text-neutral-600">Sign in or create your member account</CardDescription>
           </CardHeader>
           <CardContent>
+            {verifyPending && (
+              <div className="mb-4 rounded-lg border border-[#aa0202]/20 bg-[#aa0202]/5 p-4 text-sm">
+                <p className="font-medium text-[#aa0202]">Verification pending</p>
+                <p className="mt-1 text-neutral-600">
+                  We sent a verification link to <span className="font-semibold">{verifyEmail}</span>. Check your inbox and spam folder.
+                </p>
+                <button
+                  type="button"
+                  onClick={resendVerification}
+                  disabled={busy || resendCooldown > 0}
+                  className="mt-2 text-sm font-medium text-[#aa0202] hover:underline disabled:opacity-50 disabled:hover:no-underline"
+                >
+                  {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend verification email"}
+                </button>
+              </div>
+            )}
+
             {bioAvailable && bioEnrolled && (
               <Button
                 type="button"
