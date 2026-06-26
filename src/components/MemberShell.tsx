@@ -63,9 +63,9 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
             {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
           </button>
 
-          <div className={`flex flex-col items-center pb-5 text-center ${collapsed ? "px-0" : "px-3 pt-1"}`}>
+          <div className={`relative z-10 flex flex-col items-center pb-5 text-center ${collapsed ? "px-0" : "px-3 pt-1"}`}>
             <div
-              className={`relative grid place-items-center rounded-full bg-[#aa0202] ring-1 ring-white/30 ring-offset-2 ring-offset-[#aa0202] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(255,255,255,0.18)] transition-all duration-300 ${collapsed ? "h-12 w-12" : "h-28 w-28"}`}
+              className={`smokey-red-shadow relative grid place-items-center rounded-full bg-[#aa0202] ring-1 ring-white/30 ring-offset-2 ring-offset-[#aa0202] transition-all duration-300 ${collapsed ? "h-12 w-12" : "h-28 w-28"}`}
             >
               <span className="pointer-events-none absolute inset-1 rounded-full border border-white/25" />
               <span className="pointer-events-none absolute inset-2.5 rounded-full border border-white/10" />
@@ -77,7 +77,7 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <nav className="flex-1 space-y-1 overflow-hidden">
+          <nav className="relative z-10 flex-1 space-y-1 overflow-hidden">
             {navItems.map((item) => {
               const active = pathname === item.to;
               const Icon = item.icon;
