@@ -101,7 +101,7 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
           <button
             onClick={async () => { await signOut(); navigate({ to: "/" }); }}
             title={collapsed ? "Log Out" : undefined}
-            className={`mt-2 flex items-center gap-3 rounded-[12px] ${collapsed ? "justify-center px-2 py-2.5" : "px-4 py-2.5"} text-left text-[14px] font-medium text-white hover:bg-white/10`}
+            className={`relative z-10 mt-2 flex items-center gap-3 rounded-[12px] ${collapsed ? "justify-center px-2 py-2.5" : "px-4 py-2.5"} text-left text-[14px] font-medium text-white hover:bg-white/10`}
           >
             <LogOut className="h-[18px] w-[18px] shrink-0" />
             {!collapsed && "Log Out"}
